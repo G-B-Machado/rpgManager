@@ -2,7 +2,7 @@
 <html ng-app="rpg">
     <head>
         <title>Começando projeto RPG</title>
-        <script src="angular.js"></script>
+        <script src="lib/angular/angular.js"></script>
         <script>
             angular.module("rpg", []);
             angular.module("rpg").controller("rpgCtrl", function ($scope){
@@ -10,13 +10,13 @@
             });
         </script>
     </head>
-    <body>
+    <body ng-controller="rpgCtrl">
         <div>
             <h3>Criação de ficha versão 1</h3>
             <form>
                 <label>Nome Completo</label>
                 <input type="text"><br>
-                <label ng-controller="rpgCtrl">{{message}}</label>
+                <label >{{message}}</label>
                 <input type="text"><br>
                 <label>Idade</label>
                 <input type="text"><br><br>
