@@ -3,26 +3,48 @@
     <head>
         <title>Começando projeto RPG</title>
         <link rel="stylesheet" type="text/css" href="lib/bootsrap/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="lib/css/style.css">
         <script src="lib/angular/angular.js"></script>
         <script>
             angular.module("rpg", []);
             angular.module("rpg").controller("rpgCtrl", function ($scope){
-                $scope.message = "Raça";
+                $scope.app = "RPG Manager";
+                $scope.personagens = [
+                    {nome: 'Fulano', raca:'Elfo', classe:'Guerreiro'},
+                    {nome: 'Beltrano', raca:'Gnomo', classe:'Bardo'},
+                    {nome: 'Diferentão', raca:'Orc', classe:'Mago'}
+                ]
+                $scope.adicionarPersonagem = function (personagem){
+                    $scope.personagens.push(angular.copy(personagem));
+                    delete $scope.personagem;
+                }
             });
         </script>
     </head>
     <body ng-controller="rpgCtrl">
-        <div>
-            <h3>Criação de ficha versão 1</h3>
-            <form>
-                <label>Nome Completo</label>
-                <input type="text"><br>
-                <label >{{message}}</label>
-                <input type="text"><br>
-                <label>Idade</label>
-                <input type="text"><br><br>
-                <input type="button" value="Teste">
-            </form>
+        <div class="jumbotron">
+            <h3>{{app}}</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Raça</th>
+                        <th>Classe</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="personagem in personagens">
+                        <td ng-repeat="(key,value) in personagem">{{value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr style="border-color: antiquewhite;"><br>
+            <input class="form-control" type="text" ng-model="personagem.nome"/>
+            <input class="form-control" type="text" ng-model="personagem.raca"/>
+            <input class="form-control" type="text" ng-model="personagem.classe"/><br>
+            {{personagem}}
+            <button ng-click="adicionarPersonagem(personagem)" type="button" class="btn btn-light">Criar</button>
+            <a href="criarFichas.html"><button type="button" class="btn btn-light">Criar Fichas</button></a>
         </div>
     </body>
 </html>
