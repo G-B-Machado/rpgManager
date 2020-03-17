@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="criarFicha">
     <head>
+			<meta charset="UTF-8">
         <title>Criador de Fichas</title>
         <link rel="stylesheet" type="text/css" href="lib/bootsrap/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="lib/css/style.css">
@@ -9,6 +10,11 @@
             angular.module("criarFicha", []);
             angular.module("criarFicha").controller("criarFichaCtrl", function ($scope){
                 $scope.app = "Criação de Fichas";
+				$scope.fichas = [];
+				$scope.criarFicha = function(ficha){					
+					$scope.fichas.push(angular.copy(ficha));
+					delete $scope.ficha;
+				}
             });
         </script>
     </head>
@@ -17,13 +23,27 @@
             <h3>{{app}}</h3>
             <form>
                 <label>Nome Completo</label>
-                <input type="text"><br>
+                <input class="form-control" type="text" ng-model="ficha.nome"><br>
                 <label >Raça</label>
-                <input type="text"><br>
+                <input class="form-control" type="text" ng-model="ficha.raca"><br>
                 <label>Idade</label>
-                <input type="text"><br><br>
-                <button type="button" class="btn btn-light">Criar Fichas</button>
-            </form>
-        </div>
+                <input class="form-control" type="text" ng-model="ficha.classe"><br><br>
+                <button ng-click="criarFicha(ficha)"type="button" class="btn btn-light">Criar Fichas</button>
+			</form>
+			{{ficha}}
+			<table class="table table-bordered tableCriarFicha">
+					<thead>
+						<tr ng-repeat="ficha in fichas">
+							<th ng-repeat="(key, value) in ficha">{{key}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="ficha in fichas">
+							<td ng-repeat="(key, value) in ficha">{{value}}</td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+
     </body>
 </html>
