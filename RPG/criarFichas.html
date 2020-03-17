@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="criarFicha">
+    <head>
+        <title>Criador de Fichas</title>
+        <link rel="stylesheet" type="text/css" href="lib/bootsrap/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="lib/css/style.css">
+        <script src="lib/angular/angular.js"></script>
+        <script>
+            angular.module("criarFicha", []);
+            angular.module("criarFicha").controller("criarFichaCtrl", function ($scope){
+                $scope.app = "Criação de Fichas";
+            });
+        </script>
+    </head>
+    <body ng-controller="criarFichaCtrl">
+        <div class="jumbotron">
+            <h3>{{app}}</h3>
+            <form>
+                <label>Nome Completo</label>
+                <input type="text"><br>
+                <label >Raça</label>
+                <input type="text"><br>
+                <label>Idade</label>
+                <input type="text"><br><br>
+                <button type="button" class="btn btn-light">Criar Fichas</button>
+            </form>
+        </div>
+    </body>
+</html>

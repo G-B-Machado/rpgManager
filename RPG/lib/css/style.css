@@ -1,0 +1,10 @@
+.jumbotron{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: black;
+    color: blanchedalmond;
+}
+.form-control{
+    margin-top: 5px;
+}
