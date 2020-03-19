@@ -11,6 +11,20 @@
             angular.module("criarFicha").controller("criarFichaCtrl", function ($scope){
                 $scope.app = "Criação de Fichas";
 				$scope.fichas = [];
+				$scope.racas = [
+					{id:'1', nome: 'Humano'},
+					{id:'2', nome: 'Gnomo'},
+					{id: '3', nome:'Orc'},
+					{id: '4', nome: 'Elfo'},
+					{id: '5', nome: 'Anão'}
+				];
+				$scope.classes = [
+					{id:'1', nome: 'Bardo'},
+					{id:'2', nome: 'Druida'},
+					{id: '3', nome:'Mago'},
+					{id: '4', nome: 'Guerreiro'},
+					{id: '5', nome: 'Ranger'}
+				];
 				$scope.criarFicha = function(ficha){					
 					$scope.fichas.push(angular.copy(ficha));
 					delete $scope.ficha;
@@ -23,11 +37,15 @@
             <h3>{{app}}</h3>
             <form>
                 <label>Nome Completo</label>
-                <input class="form-control" type="text" ng-model="ficha.nome"><br>
+                <input class="form-control" type="text" ng-model="ficha.nome" placeholder="Nome"><br>
                 <label >Raça</label>
-                <input class="form-control" type="text" ng-model="ficha.raca"><br>
-                <label>Idade</label>
-                <input class="form-control" type="text" ng-model="ficha.classe"><br><br>
+                <select class="form-control" ng-model="ficha.raca" ng-options="raca.nome for raca in racas">
+					<option value="">Raça</option>
+				</select><br>
+                <label>Classe</label>
+                <select class="form-control" ng-model="ficha.classe" ng-options="classe.nome for classe in classes">
+					<option value="">Classe</option>
+				</select><br>
                 <button ng-click="criarFicha(ficha)"type="button" class="btn btn-light">Criar Fichas</button>
 			</form>
 			{{ficha}}
@@ -39,7 +57,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="ficha in fichas">
-							<td ng-repeat="(key, value) in ficha">{{value}}</td>
+							<td>{{ficha.name}}</td>
+							<td>{{ficha.raca.nome}}</td>
+							<td>{{ficha.classe.nome}}</td>
 						</tr>
 					</tbody>
 				</table>

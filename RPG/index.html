@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html ng-app="rpg">
     <head>
-			<meta charset="UTF-8">
+		<meta charset="UTF-8">
         <title>Começando projeto RPG</title>
         <link rel="stylesheet" type="text/css" href="lib/bootsrap/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="lib/css/style.css">
+		<link rel="stylesheet" type="text/css" href="lib/css/style.css">
+		<style>
+			.selecionado{
+				background-color:white;    
+				text-shadow: 1px 1px black; 			
+			}			
+		</style>
         <script src="lib/angular/angular.js"></script>
         <script>
             angular.module("rpg", []);
@@ -18,34 +24,54 @@
                 $scope.adicionarPersonagem = function (personagem){
                     $scope.personagens.push(angular.copy(personagem));
                     delete $scope.personagem;
-                }
+				}
+				$scope.apagarPersonagem = function (personagens){
+                    $scope.personagens = personagens.filter(function (personagem){
+						if(!personagem.selecionado) return personagem;
+					});
+				}
+				$scope.isPersonagemSelecionado = function(personagens){
+					return !personagens.some(function (personagem) {
+						console.log(personagem.selecionado);
+						return personagem.selecionado;
+					});																					
+				};
+				$scope.classe = 'selecionado';						
             });
         </script>
     </head>
     <body ng-controller="rpgCtrl">
         <div class="jumbotron">
-            <h3>{{app}}</h3>
-            <table class="table table-striped">
+			<h3>{{app}}</h3>			
+            <table class="table">
                 <thead>
                     <tr>
+						<th></th>
                         <th>Nome</th>
                         <th>Raça</th>
                         <th>Classe</th> 
                     </tr>
-                </thead>
+				</thead>				
                 <tbody>
-                    <tr ng-repeat="personagem in personagens">
-                        <td ng-repeat="(key,value) in personagem">{{value}}</td>
+                    <tr ng-repeat="personagem in personagens" ng-class="{selecionado: personagem.selecionado, corSelecionado:personagem.selecionado}">
+						<td><input type="checkbox" ng-model="personagem.selecionado"/></td>
+						<td>{{personagem.nome}}</td>
+						<td>{{personagem.raca}}</td>
+						<td>{{personagem.classe}}</td>
                     </tr>
                 </tbody>
             </table>
             <hr style="border-color: antiquewhite;"><br>
-            <input class="form-control" type="text" ng-model="personagem.nome"/>
-            <input class="form-control" type="text" ng-model="personagem.raca"/>
-            <input class="form-control" type="text" ng-model="personagem.classe"/><br>
+            <input class="form-control" type="text" ng-model="personagem.nome" placeholder="Nome"/>
+            <input class="form-control" type="text" ng-model="personagem.raca" placeholder="Raça"/>
+            <input class="form-control" type="text" ng-model="personagem.classe" placeholder="Classe"/><br>
             {{personagem}}
-            <button ng-click="adicionarPersonagem(personagem)" type="button" class="btn btn-light">Criar</button>
+			<button ng-click="adicionarPersonagem(personagem)" type="button" class="btn btn-light" ng-disabled="!personagem.nome || !personagem.raca || !personagem.classe">Criar</button>
+			<button ng-click="apagarPersonagem(personagens)" type="button" class="btn btn-light" ng-if="!isPersonagemSelecionado(personagens)">Apagar</button>
             <a href="criarFichas.html"><button type="button" class="btn btn-light">Criar Fichas</button></a>
-        </div>
+		</div>
+		<div style="text-align:center">
+				Criado por Guilherme Machado
+			</div>
     </body>
 </html>
