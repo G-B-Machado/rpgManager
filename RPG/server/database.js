@@ -1,15 +1,3 @@
-// const cn = {
-// 	host: "localhost",
-// 	port: 5432,
-// 	database: "rpgmanager",
-// 	user: "postgres",
-// 	password: "123456",
-// 	max: 30 // use up to 30 connections
-// };
-
-// const db = pgp(cn);
-// console.log(db);
-
 const pg = require("pg");
 const express = require("express");
 const app = express();
@@ -24,12 +12,17 @@ const config = {
 // pool takes the object above -config- as parameter
 const pool = new pg.Pool(config);
 
+pool
+	.query("select * from ficha")
+	.then(res => console.log(res.rows))
+	.catch(e => console.error(e.stack));
+
 app.get("/", (req, res, next) => {
 	pool.connect(function (err, client, done) {
 		if (err) {
 			console.log("Can not connect to the DB" + err);
 		}
-		client.query("SELECT * FROM GetAllStudent()", function (err, result) {
+		client.query("SELECT * FROM ficha", function (err, result) {
 			done();
 			if (err) {
 				console.log(err);
