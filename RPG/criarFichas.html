@@ -35,7 +35,7 @@
     <body ng-controller="criarFichaCtrl">
         <div class="jumbotron">
             <h3>{{app}}</h3>
-            <form>
+            <form autocomplete="on">
                 <label>Nome Completo</label>
                 <input class="form-control" type="text" ng-model="ficha.nome" placeholder="Nome"><br>
                 <label >Raça</label>
@@ -51,13 +51,15 @@
 			{{ficha}}
 			<table class="table table-bordered tableCriarFicha">
 					<thead>
-						<tr ng-repeat="ficha in fichas">
-							<th ng-repeat="(key, value) in ficha">{{key}}</th>
+						<tr>
+							<th>Nome</th>
+							<th>Raça</th>
+							<th>Classe</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="ficha in fichas">
-							<td>{{ficha.name}}</td>
+							<td>{{ficha.nome}}</td>
 							<td>{{ficha.raca.nome}}</td>
 							<td>{{ficha.classe.nome}}</td>
 						</tr>
