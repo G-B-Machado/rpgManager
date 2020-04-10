@@ -34,18 +34,32 @@
     </head>
     <body ng-controller="criarFichaCtrl">
         <div class="jumbotron">
-            <h3>{{app}}</h3>
+            <h2>{{app}}</h3>
             <form autocomplete="on">
-                <label>Nome Completo</label>
-                <input class="form-control" type="text" ng-model="ficha.nome" placeholder="Nome"><br>
-                <label >Raça</label>
-                <select class="form-control" ng-model="ficha.raca" ng-options="raca.nome for raca in racas">
+				<hr>
+				<h4>Dados</h4>
+                <label for="nome">Nome Completo</label>
+                <input id="nome" class="form-control" type="text" ng-model="ficha.nome" placeholder="Nome"><br>
+                <label for="raca">Raça</label>
+                <select id="raca" class="form-control" ng-model="ficha.raca" ng-options="raca.nome for raca in racas">
 					<option value="">Raça</option>
 				</select><br>
-                <label>Classe</label>
-                <select class="form-control" ng-model="ficha.classe" ng-options="classe.nome for classe in classes">
+                <label for="classe">Classe</label>
+                <select id="classe" class="form-control" ng-model="ficha.classe" ng-options="classe.nome for classe in classes">
 					<option value="">Classe</option>
 				</select><br>
+				<hr>
+				<h4>Atributos</h3>
+					<label>Força</label>
+					<input class="form-control" type="number" max="20" min="10" placeholder="10"><br>
+					<label>Destreza</label>
+					<input class="form-control" type="number" max="20" min="10" placeholder="10"><br>
+					<label>Constituição</label>
+					<input class="form-control" type="number" max="20" min="10" placeholder="10"><br>
+					<label>Inteligência</label>
+					<input class="form-control" type="number" max="20" min="10" placeholder="10"><br>
+					<label>Carisma</label>
+					<input class="form-control" type="number" max="20" min="10" placeholder="10"><br>
                 <button ng-click="criarFicha(ficha)"type="button" class="btn btn-light">Criar Fichas</button>
 			</form>
 			{{ficha}}
